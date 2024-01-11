@@ -8,22 +8,24 @@
         </span>
       </h1>
     </div>
-    <div class="details-form-container">
-      <div class="input-container margin-bottom ">
-        <div class="email-container margin-bottom">
-          <input type="email" placeholder="Email">
+    <form [formGroup]="userForm">
+      <div class="details-form-container" [formGroup]="userForm">
+        <div class="input-container margin-bottom ">
+          <div class="email-container margin-bottom">
+            <input type="email" placeholder="Email" formControlName="email">
+          </div>
+        </div>
+        <div class="name-container margin-bottom">
+          <input type="text" placeholder="Name" formControlName="phone">
+        </div>
+        <div class="hex-code-container margin-bottom">
+          <input type="number" maxlength="8" placeholder="Enter 16 digits HEX code" formControlName="hexCode">
+        </div>
+        <div class="join-button-container margin-bottom">
+          <button type="button" class="background-color" (click)="saveData()">Join</button>
         </div>
       </div>
-      <div class="name-container margin-bottom">
-        <input type="text" placeholder="Name">
-      </div>
-      <div class="hex-code-container margin-bottom">
-        <input type="text" placeholder="Enter 16 digits HEX code">
-      </div>
-      <div class="join-button-container margin-bottom">
-        <button type="button" class="background-color">Join</button>
-      </div>
-    </div>
+    </form>
   </div>
 
   <div class="right-side-container">
