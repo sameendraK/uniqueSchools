@@ -2,23 +2,26 @@
   <div class="left-side-container">
     <div class="heading-container">
       <h1>
-        Join Unique Schools
+        Join
+        <span class="font-color">
+          {{title}}
+        </span>
       </h1>
     </div>
     <div class="details-form-container">
-      <div class="input-container">
-        <div class="email-container">
-          <input type="email">
+      <div class="input-container margin-bottom ">
+        <div class="email-container margin-bottom">
+          <input type="email" placeholder="Email">
         </div>
       </div>
-      <div class="name-container">
+      <div class="name-container margin-bottom">
         <input type="text" placeholder="Name">
       </div>
-      <div class="hex-code-container">
+      <div class="hex-code-container margin-bottom">
         <input type="text" placeholder="Enter 16 digits HEX code">
       </div>
-      <div class="join-button-container">
-        <button type="button">Join</button>
+      <div class="join-button-container margin-bottom">
+        <button type="button" class="background-color">Join</button>
       </div>
     </div>
   </div>
@@ -26,7 +29,12 @@
   <div class="right-side-container">
     <div class="right-side-heading-container">
       <h1>
-        {{numberOfJoinees}} Joinee's
+        <span class="font-color">
+          {{numberOfJoinees}}
+        </span>
+        <span>
+          Joinee's
+        </span>
       </h1>
     </div>
     <div class="joinees-table-container">

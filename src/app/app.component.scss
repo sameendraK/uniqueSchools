@@ -1,0 +1,34 @@
+.main-container {
+    width: 100%;
+    display: flex;
+
+    .left-side-container {
+        width: 50%;
+        margin-left: 10rem;
+
+        .heading-container {
+            width: 40%;
+        }
+
+        .details-form-container {
+            .margin-bottom {
+                margin-bottom: 5px;
+            }
+
+            .join-button-container {
+                width: 20%;
+
+                button {
+                    width: 100%;
+                    border: 0;
+                    border-radius: 10px;
+                }
+            }
+        }
+
+    }
+
+    .right-side-container {
+        width: 50%;
+    }
+}

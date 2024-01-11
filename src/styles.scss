@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+$text-color: #D97083;
+
+.font-color {
+    color: $text-color;
+}
+
+.background-color {
+    background-color: $text-color;
+}
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
