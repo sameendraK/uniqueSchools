@@ -42,15 +42,15 @@
     <div class="joinees-table-container">
       <ng-container>
         <table>
-          <thead>
+          <!-- <thead>
             <tr>
               <th> Email</th>
               <th> Phone</th>
               <th> HEX code (key)</th>
             </tr>
-          </thead>
-          <tbody *ngFor="let data of localStorageArray">
-            <tr>
+          </thead> -->
+          <tbody>
+            <tr *ngFor="let data of localStorageArray">
               <td>
                 {{data.email}}
               </td>

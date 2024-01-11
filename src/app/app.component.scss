@@ -38,14 +38,16 @@
             overflow: auto;
 
             table {
-                border: solid 2px black;
                 width: 80%;
+                border-collapse: collapse;
             }
 
-            tr {
-                td {
-                    text-align: center;
-                }
+            tbody tr:nth-child(odd) {
+                background-color: #e49eab;
+            }
+
+            tbody tr:nth-child(even) {
+                background-color: #f6dde1;
             }
         }
     }
