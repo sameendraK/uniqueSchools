@@ -30,5 +30,23 @@
 
     .right-side-container {
         width: 50%;
+
+        .right-side-heading-container {}
+
+        .joinees-table-container {
+            max-height: 16rem;
+            overflow: auto;
+
+            table {
+                border: solid 2px black;
+                width: 80%;
+            }
+
+            tr {
+                td {
+                    text-align: center;
+                }
+            }
+        }
     }
 }

@@ -16,7 +16,6 @@ export class AppComponent {
 
   numberOfJoinees: number = 0;
 
-  data = { id: 1, name: "Sameendra", code: "+91" }
   userForm: FormGroup = new FormGroup(
     {
       email: new FormControl(),
@@ -30,5 +29,6 @@ export class AppComponent {
   saveData() {
     this.localStorageArray.push(this.userForm.value)
     localStorage.setItem('tableData', JSON.stringify(this.localStorageArray))
+    this.numberOfJoinees = this.localStorageArray.length;
   }
 }

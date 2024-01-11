@@ -40,7 +40,30 @@
       </h1>
     </div>
     <div class="joinees-table-container">
-      <table></table>
+      <ng-container>
+        <table>
+          <thead>
+            <tr>
+              <th> Email</th>
+              <th> Phone</th>
+              <th> HEX code (key)</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let data of localStorageArray">
+            <tr>
+              <td>
+                {{data.email}}
+              </td>
+              <td>
+                {{data.phone}}
+              </td>
+              <td>
+                {{data.hexCode}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
     </div>
   </div>
 </div>
