@@ -12,22 +12,25 @@
       <div class="details-form-container" [formGroup]="userForm">
         <div class="input-container margin-bottom ">
           <div class="email-container margin-bottom">
-            <input type="email" placeholder="Email" formControlName="email">
+            <input #inputEle type="email" placeholder="Email" formControlName="email">
           </div>
         </div>
         <div class="name-container margin-bottom">
-          <input type="text" placeholder="Name" formControlName="phone">
+          <input #inputEle type="text" placeholder="Name" formControlName="name">
         </div>
         <div class="hex-code-container margin-bottom">
-          <input type="number" maxlength="8" placeholder="Enter 16 digits HEX code" formControlName="hexCode">
+          <input #inputEle type="text" maxlength="8" placeholder="16 digits HEX code" formControlName="hexCode">
         </div>
         <div class="join-button-container margin-bottom">
-          <button type="button" class="background-color" (click)="saveData()">Join</button>
+          <button type="button" class="background-color" (click)="joinButtonClickHandler()">Join</button>
+
+          <!-- <span>
+            <button type="button" class="background-color" (click)="saveData()">Join</button>
+          </span> -->
         </div>
       </div>
     </form>
   </div>
-
   <div class="right-side-container">
     <div class="right-side-heading-container">
       <h1>
@@ -39,31 +42,44 @@
         </span>
       </h1>
     </div>
-    <div class="joinees-table-container">
-      <ng-container>
-        <table>
-          <!-- <thead>
-            <tr>
-              <th> Email</th>
-              <th> Phone</th>
-              <th> HEX code (key)</th>
-            </tr>
-          </thead> -->
-          <tbody>
-            <tr *ngFor="let data of localStorageArray">
-              <td>
-                {{data.email}}
-              </td>
-              <td>
-                {{data.phone}}
-              </td>
-              <td>
-                {{data.hexCode}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ng-container>
-    </div>
+    <ng-container *ngIf="localStorageArray" else noJoineesTemplate>
+      <div class="joinees-table-container">
+        <ng-container>
+          <table>
+            <!-- <thead>
+              <tr>
+                <th> Email</th>
+                <th> name</th>
+                <th> HEX code (key)</th>
+              </tr>
+            </thead> -->
+            <tbody>
+              <ng-container *ngFor="let data of localStorageArray">
+                <!-- <button> -->
+                <tr (click)="rowClickHandler(data)">
+                  <td>
+                    {{data.maskedEmail}}
+                  </td>
+                  <td>
+                    {{data.name}}
+                  </td>
+                  <td>
+                    {{data.hexCode}}
+                  </td>
+                </tr>
+                <!-- </button> -->
+              </ng-container>
+            </tbody>
+          </table>
+        </ng-container>
+      </div>
+    </ng-container>
   </div>
+
 </div>
+<ng-template #noJoineesTemplate>
+  <div class="nothing-class">
+    nothing
+  </div>
+  <!-- <h4>{{noJoineesText}}</h4> -->
+</ng-template>
