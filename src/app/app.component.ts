@@ -109,6 +109,24 @@ export class AppComponent {
   decryptHexCode(row: any) {
     return window.atob(row.hexCode)
   }
-  
+
+  dragStart(event: DragEvent, index: number): void {
+    // event.dataTransfer?.setData('text/plain', index.toString());
+  }
+
+  dragEnter(event: DragEvent, index: number): void {
+    // event.preventDefault();
+    // Add styles or other feedback to indicate potential drop target
+  }
+
+  allowDrop(event: DragEvent): void {
+    event.preventDefault();
+  }
+ 
+  drop(event: DragEvent, targetIndex: number): void {
+    const startIndex = parseInt(event.dataTransfer?.getData('text/plain') || '', 10);
+    const [draggedItem] = this.localStorageArray.splice(startIndex, 1);
+    this.localStorageArray.splice(targetIndex, 0, draggedItem);
+  }
 
 }

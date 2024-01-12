@@ -54,9 +54,10 @@
               </tr>
             </thead> -->
             <tbody>
-              <ng-container *ngFor="let data of localStorageArray">
+              <ng-container *ngFor="let data of localStorageArray; let i = index">
                 <!-- <button> -->
-                <tr (click)="rowClickHandler(data)">
+                <tr (click)="rowClickHandler(data)" draggable="true" (dragstart)="dragStart($event, i)"
+                  (dragenter)="dragEnter($event, i)" (dragover)="allowDrop($event)" (drop)="drop($event, i)">
                   <td>
                     {{data.maskedEmail}}
                   </td>
@@ -78,7 +79,7 @@
 
 </div>
 <ng-template #noJoineesTemplate>
-  <div class="nothing-class">
+  <div class=" nothing-class">
     nothing
   </div>
   <!-- <h4>{{noJoineesText}}</h4> -->
