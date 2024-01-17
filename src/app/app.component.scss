@@ -1,3 +1,6 @@
+body{
+    overflow-x: hidden;
+}
 .main-container {
     width: 100%;
     display: flex;
@@ -15,13 +18,37 @@
                 margin-bottom: 5px;
             }
 
-            .join-button-container {
-                width: 20%;
+            .input-container {
+                .email-container {
+                    .invalid {
+                        border-color: red;
+                    }
+                }
+            }
 
-                button {
-                    width: 100%;
-                    border: 0;
-                    border-radius: 10px;
+            .buttons-container {
+                display: flex;
+
+                .join-button-container {
+                    width: 20%;
+                    // display: flex;
+
+                    button {
+                        // width: 50%;
+                        border: 0;
+                        border-radius: 10px;
+                    }
+                }
+
+                .reset-form-button-container {
+                    // display: flex;
+                    align-items: baseline;
+
+                    button {
+
+                        border: 0;
+                        border-radius: 10px;
+                    }
                 }
             }
         }
@@ -51,4 +78,75 @@
             }
         }
     }
+}
+
+@media only screen and (max-width: 767px) {
+    body{
+        overflow-x: hidden;
+    }
+    .main-container {
+        overflow-x: hidden;
+        flex-direction: column;
+        // background-color: lightblue;
+
+        .left-side-container {
+
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0;
+
+            .heading-container {
+                text-align: center;
+            }
+
+            .details-form-container{
+                .buttons-container{
+                    .join-button-container{
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+
+        .right-side-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            // margin-left: 10rem;
+            .right-side-heading-container {
+                display: flex;
+                justify-content: center;
+                
+            }
+        }
+
+        .joinees-table-container {
+            width: 100%;
+
+            table {
+                width: 100% !important;
+            }
+
+            tr {
+                text-align: center;
+            }
+        }
+
+        .hide-row {
+            display: none;
+        }
+    }
+}
+
+.invalid {
+    // border-color: red;
+    width: 10rem;
+    border: 1px solid red;
+    border-radius: 1px;
 }

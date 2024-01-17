@@ -12,7 +12,8 @@
       <div class="details-form-container" [formGroup]="userForm">
         <div class="input-container margin-bottom ">
           <div class="email-container margin-bottom">
-            <input #inputEle type="email" placeholder="Email" formControlName="email">
+            <input #inputEle type="email" [disabled]="true" placeholder="Email" formControlName="email"
+              [ngClass]="{'invalid':userForm.get('email')?.errors}">
           </div>
         </div>
         <div class="name-container margin-bottom">
@@ -21,12 +22,14 @@
         <div class="hex-code-container margin-bottom">
           <input #inputEle type="text" maxlength="8" placeholder="16 digits HEX code" formControlName="hexCode">
         </div>
-        <div class="join-button-container margin-bottom">
-          <button type="button" class="background-color" (click)="joinButtonClickHandler()">Join</button>
-
-          <!-- <span>
-            <button type="button" class="background-color" (click)="saveData()">Join</button>
-          </span> -->
+        <div class="buttons-container">
+          <div class="join-button-container margin-bottom">
+            <button type="button" class="background-color" (click)="joinButtonClickHandler()"
+              [disabled]="isInValidForm()">Join</button>
+          </div>
+          <div class="reset-form-button-container margin bootom">
+            <button type="button" class="background-color" (click)="resetForm()">Reset</button>
+          </div>
         </div>
       </div>
     </form>
@@ -56,9 +59,12 @@
             <tbody>
               <ng-container *ngFor="let data of localStorageArray; let i = index">
                 <!-- <button> -->
-                <tr (click)="rowClickHandler(data)" draggable="true" (dragstart)="dragStart($event, i)"
-                  (dragenter)="dragEnter($event, i)" (dragover)="allowDrop($event)" (drop)="drop($event, i)">
+                <tr (click)="rowClickHandler(data)" draggable="true" (dragover)="allowDrop($event)"
+                  (drop)="drop($event, i)">
                   <td>
+                    #{{i+1}}
+                  </td>
+                  <td class="hide-row">
                     {{data.maskedEmail}}
                   </td>
                   <td>

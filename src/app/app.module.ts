@@ -13,9 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // CryptoModule
   ],
-  providers: [],
+  providers: [CryptoKey],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
