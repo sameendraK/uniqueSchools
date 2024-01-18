@@ -1,4 +1,5 @@
 # UniqueSchools
+The main intention behind the implementation is to make the User Experience seamless. This means, the user does not have to manually do the tasks which can be avoided to do manually. That is why, a reset button is implemented and also, cursor goes to the first input element. This makes the website easier to use.
 **This project is deployed on:** https://sameendrak.github.io/uniqueSchools/
 1. **Registeration Form:** This project is a registeration form for Unique Schools. Once the candidate registers, the details of the candidate will be reflected in the table displayed.
 2. **Validations:** Validations are added such that if:
