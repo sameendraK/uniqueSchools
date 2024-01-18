@@ -1,6 +1,7 @@
-body{
+body {
     overflow-x: hidden;
 }
+
 .main-container {
     width: 100%;
     display: flex;
@@ -65,7 +66,7 @@ body{
             overflow: auto;
 
             table {
-                width: 80%;
+                width: 100%;
                 border-collapse: collapse;
             }
 
@@ -76,14 +77,29 @@ body{
             tbody tr:nth-child(even) {
                 background-color: #f6dde1;
             }
+
         }
+        .export-csv-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2%;
+            button {
+                background-color: #e6b2bb;
+                border:0;
+                border-radius: 6px;
+            }
+        }
+    }
+    button:hover{
+        cursor: pointer;
     }
 }
 
 @media only screen and (max-width: 767px) {
-    body{
+    body {
         overflow-x: hidden;
     }
+
     .main-container {
         overflow-x: hidden;
         flex-direction: column;
@@ -102,9 +118,9 @@ body{
                 text-align: center;
             }
 
-            .details-form-container{
-                .buttons-container{
-                    .join-button-container{
+            .details-form-container {
+                .buttons-container {
+                    .join-button-container {
                         margin-right: 10px;
                     }
                 }
@@ -122,7 +138,7 @@ body{
             .right-side-heading-container {
                 display: flex;
                 justify-content: center;
-                
+
             }
         }
 

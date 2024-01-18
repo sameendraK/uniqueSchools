@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validator, Validators } from '@angular/forms';
 import * as CryptoJS from 'crypto-js';
+import { ngxCsv } from 'ngx-csv';
 
 interface DataObj {
   email: string,
@@ -218,4 +219,30 @@ export class AppComponent implements OnInit {
     this.localStorageArray.splice(targetIndex, 0, draggedItem);
   }
 
+  propertiesToRemove = [
+    'hashedHexCode',
+    'maskedEmail',
+    'hashedEmail',
+    'hashedName'
+  ]
+
+  exportCSV() {
+    let options = {
+      title: 'Table Data',
+      fieldSeperator: ',',
+      quoteStrings: '""',
+      decimalSeperator: '.',
+      showLabels: false,
+      noDownload: false,
+      showTitle: false,
+      useBom: false,
+      headers: ["email", "name"]
+    }
+    let csvData = this.localStorageArray.map(obj => {
+      const { name, email, ...others } = obj;
+      return { email, name };
+    });
+    console.log(csvData);
+    new ngxCsv(csvData, "report", options);
+  }
 }

@@ -81,6 +81,11 @@
         </ng-container>
       </div>
     </ng-container>
+    <ng-container *ngIf="localStorageArray.length>0">
+      <div class="export-csv-button-container">
+        <button type="button" (click)="exportCSV()">Export CSV</button>
+      </div>
+    </ng-container>
   </div>
 
 </div>
