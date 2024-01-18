@@ -1,8 +1,8 @@
 # UniqueSchools
 1. This project is a registeration form for Unique Schools. Once the candidate registers, the details of the candidate will be reflected in the table displayed.
 2. Validations are added such that if:
-  1. Invalid email
-  2. Both email and name fields are required to be filled.
+    1. Invalid email
+    2. Both email and name fields are required to be filled.
 3. On clicking Join, the details are added and the count of the table is reflected based on that.
 4. The table rows are drag and drop enabled.
 5. On single click of the row, the details (name and email) are populated in the input fields.
