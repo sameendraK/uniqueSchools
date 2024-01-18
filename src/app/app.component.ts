@@ -57,17 +57,40 @@ export class AppComponent implements OnInit {
   }
 
   joinButtonClickHandler() {
-    let changed = this.checkForChanges();
-    if (changed) {
+    let isDuplicate = this.checkForDuplicates();
+    if (!isDuplicate) {
       this.transformAndPushData();
       this.resetForm();
-
       this.focusFirstInputElement();
-      this.numberOfJoinees = this.localStorageArray.length;
+      this.updateNumberOfJoinees();
     }
     else {
-      this.displayNoChange();
+      this.displayDuplicateEntry();
     }
+
+  }
+
+  checkForDuplicates() {
+    let filteredArray = this.localStorageArray.filter((i: DataObj) => {
+      if (this.isEqual(i, this.userForm.value)) {
+        return true;
+      }
+      return;
+    })
+    if (filteredArray.length > 0) {
+      return true
+    }
+    return false;
+  }
+
+  isEqual(obj: DataObj, formValue: any) {
+    if ((obj && formValue) && (obj.email === formValue.email) && (obj.name === formValue.name)) {
+      return true
+    }
+    else {
+      return false;
+    }
+    // return JSON.stringify(obj) === JSON.stringify(formValue);
   }
 
   //hashed values of email, name are checked with hashed values of the details that are loaded into the user form.
@@ -93,16 +116,17 @@ export class AppComponent implements OnInit {
     //HEX-CODE: if new entry
     let userDetailsObj = this.userForm.value;
 
-    //hex-code generation
-    let hexCode = this.hexCodeGenerator();
-
-    //transforming data
-    let hashedHexCode = this.applyHash(hexCode);
-    let maskedEmail = this.applyEmailMask(userDetailsObj.email);
-    let maskedHexCodeHash = this.applyHashedHexCodeMask(hashedHexCode);
+    // //transforming data
+    // let hashedHexCode = this.applyHash(hexCode);
+    // let maskedEmail = this.applyEmailMask(userDetailsObj.email);
+    // let maskedHexCodeHash = this.applyHashedHexCodeMask(hashedHexCode);
     //
     let email = userDetailsObj.email;
     let name = userDetailsObj.name;
+    let transformData = this.transformData(email, name);
+
+    let maskedEmail = transformData.maskedEmail;
+    let maskedHexCodeHash = transformData.maskedHexCodeHash;
 
     //FORM CONTROL UPDATE
     this.updateFormControlValues(maskedEmail, maskedHexCodeHash, email, name);
@@ -110,10 +134,22 @@ export class AppComponent implements OnInit {
     this.updateResults();
   }
 
+  transformData(email: string, name: string) {
+    //hex-code generation
+    let hexCode = this.hexCodeGenerator();
+    let hashedHexCode = this.applyHash(hexCode);
+    let maskedHexCodeHash = this.applyHashedHexCodeMask(hashedHexCode);
+    let maskedEmail = this.applyEmailMask(email);
+    return { maskedEmail: maskedEmail, maskedHexCodeHash: maskedHexCodeHash, email: email, name: name }
+  }
+
   //used to reset the form
   resetForm() {
     this.userForm.reset();
     this.focusFirstInputElement();
+    if (!this.isJoinButton) {
+      this.toggleButton();
+    }
   }
 
   //used to focus on the first input element (used viewChildren).
@@ -140,6 +176,10 @@ export class AppComponent implements OnInit {
     window.alert("No change detected. Change value to update the table");
   }
 
+  displayDuplicateEntry() {
+    window.alert("Same entry already exists. Duplicate entry is not allowed.");
+  }
+
   updateFormControlValues(maskedEmail: string, hashedHexCode: any, email: string | null, name: string | null) {
 
     let hashedEmail = this.applyHash(email)
@@ -148,6 +188,7 @@ export class AppComponent implements OnInit {
     this.userForm.get('maskedEmail')?.setValue(maskedEmail);
     this.userForm.get('hashedEmail')?.setValue(hashedEmail);
     this.userForm.get('hashedName')?.setValue(hashedName);
+    this.userForm.get('hashedHexCode')?.setValue(hashedHexCode);
 
     // this.userForm.value.hexCode = this.userForm.get('hexCode')?.setValue(hashedHexCode);
     this.userForm.value.hexCode = hashedHexCode;
@@ -155,7 +196,7 @@ export class AppComponent implements OnInit {
 
   updateResults() {
     this.localStorageArray.unshift(this.userForm.value)
-    this.numberOfJoinees = this.localStorageArray.length;
+    this.updateNumberOfJoinees();
   }
 
   storeDetailsInLocalStorage(rowClone: DataObj) {
@@ -207,10 +248,52 @@ export class AppComponent implements OnInit {
     return hashedValue;
   }
 
-  rowClickHandler(row: DataObj) {
-    this.loadDetailsIntoInputFields(row)
+  rowClickHandler(row: DataObj, i: number) {
+    this.loadDetailsIntoInputFields(row);
+    if (this.isJoinButton) {
+      this.toggleButton();
+    }
+    this.populatedRowIndex = i;
   }
 
+  updateButtonClickHandler() {
+    let changed = this.checkForChanges();
+    if (changed) {
+      let email = this.userForm?.get('email')?.value;
+      let name = this.userForm?.get('name')?.value;
+      let transformData = this.transformData(email, name);
+      let maskedEmail = transformData.maskedEmail;
+      let maskedHexCodeHash = transformData.maskedHexCodeHash;
+      this.updateFormControlValues(maskedEmail, maskedHexCodeHash, email, name);
+      this.localStorageArray[this.populatedRowIndex] = this.userForm.value;
+      this.resetForm();
+      this.focusFirstInputElement();
+    }
+    else {
+      this.displayNoChange();
+    }
+  }
+
+  deleteButtonClickHandler(index: number) {
+    this.localStorageArray.splice(index, 1);
+    this.updateNumberOfJoinees();
+    // if (this.isEqual(this.localStorageArray[index], this.userForm.value)) {
+    this.resetForm();
+    // }
+  }
+
+  //used to update the table length and the number of joinees
+  updateNumberOfJoinees() {
+    this.numberOfJoinees = this.localStorageArray.length;
+  }
+
+
+  isJoinButton: boolean = true;
+  populatedRowIndex: number;
+
+  toggleButton() {
+    this.isJoinButton = !this.isJoinButton;
+  }
   allowDrop(event: DragEvent): void {
     event.preventDefault();
   }

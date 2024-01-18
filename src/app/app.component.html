@@ -23,13 +23,17 @@
           <input #inputEle type="text" maxlength="8" placeholder="16 digits HEX code" formControlName="hexCode">
         </div>
         <div class="buttons-container">
-          <div class="join-button-container margin-bottom">
+          <div *ngIf="isJoinButton" class="join-button-container button-styling margin-bottom">
             <button type="button" class="background-color" (click)="joinButtonClickHandler()"
               [disabled]="isInValidForm()">Join</button>
+          </div>
+          <div *ngIf="!isJoinButton" class="update-button-container margin-bottom">
+            <button type="button" class="background-color" (click)="updateButtonClickHandler()">Update</button>
           </div>
           <div class="reset-form-button-container margin bootom">
             <button type="button" class="background-color" (click)="resetForm()">Reset</button>
           </div>
+
         </div>
       </form>
     </div>
@@ -58,7 +62,7 @@
           <tbody>
             <ng-container *ngFor="let data of localStorageArray; let i = index">
               <!-- <button> -->
-              <tr (click)="rowClickHandler(data)" draggable="true" (dragover)="allowDrop($event)"
+              <tr (click)="rowClickHandler(data,i)" draggable="true" (dragover)="allowDrop($event)"
                 (drop)="drop($event, i)">
                 <td>
                   #{{i+1}}
@@ -71,6 +75,9 @@
                 </td>
                 <td>
                   {{data.hexCode}}
+                </td>
+                <td>
+                  <button type="button button-styling" (click)="deleteButtonClickHandler(i)">Delete</button>
                 </td>
               </tr>
               <!-- </button> -->
