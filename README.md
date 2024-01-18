@@ -1,4 +1,5 @@
 # UniqueSchools
+**This project is deployed on:** https://sameendrak.github.io/uniqueSchools/
 1. **Registeration Form:** This project is a registeration form for Unique Schools. Once the candidate registers, the details of the candidate will be reflected in the table displayed.
 2. **Validations:** Validations are added such that if:
     1. Invalid email
