@@ -1,6 +1,6 @@
 # UniqueSchools
-1. This project is a registeration form for Unique Schools. Once the candidate registers, the details of the candidate will be reflected in the table displayed.
-2. Validations are added such that if:
+1. **Registeration Form**:This project is a registeration form for Unique Schools. Once the candidate registers, the details of the candidate will be reflected in the table displayed.
+2. **Validations**: Validations are added such that if:
     1. Invalid email
     2. Both email and name fields are required to be filled.
 3. On clicking Join, the details are added and the count of the table is reflected based on that.
