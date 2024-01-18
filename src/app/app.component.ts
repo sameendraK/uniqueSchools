@@ -124,6 +124,8 @@ export class AppComponent implements OnInit {
     }
   }
 
+  //Valid ex: sam@gmail.com, sam@gmail.in, s@g.co.
+  //Invalidex: sa#m.com, samk@jf, sa$.com.
   emailValidator(control: any): any {
     if (control && control.value) {
       const emailRegex: RegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;

@@ -8,8 +8,8 @@
         </span>
       </h1>
     </div>
-    <form [formGroup]="userForm">
-      <div class="details-form-container" [formGroup]="userForm">
+    <div class="details-form-container" [formGroup]="userForm">
+      <form [formGroup]="userForm">
         <div class="input-container margin-bottom ">
           <div class="email-container margin-bottom">
             <input #inputEle type="email" [disabled]="true" placeholder="Email" formControlName="email"
@@ -31,8 +31,8 @@
             <button type="button" class="background-color" (click)="resetForm()">Reset</button>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
   <div class="right-side-container">
     <div class="right-side-heading-container">
@@ -45,42 +45,40 @@
         </span>
       </h1>
     </div>
-    <ng-container *ngIf="localStorageArray" else noJoineesTemplate>
-      <div class="joinees-table-container">
-        <ng-container>
-          <table>
-            <!-- <thead>
+    <div class="joinees-table-container">
+      <ng-container>
+        <table>
+          <!-- <thead>
               <tr>
                 <th> Email</th>
                 <th> name</th>
                 <th> HEX code (key)</th>
               </tr>
             </thead> -->
-            <tbody>
-              <ng-container *ngFor="let data of localStorageArray; let i = index">
-                <!-- <button> -->
-                <tr (click)="rowClickHandler(data)" draggable="true" (dragover)="allowDrop($event)"
-                  (drop)="drop($event, i)">
-                  <td>
-                    #{{i+1}}
-                  </td>
-                  <td class="hide-row">
-                    {{data.maskedEmail}}
-                  </td>
-                  <td>
-                    {{data.name}}
-                  </td>
-                  <td>
-                    {{data.hexCode}}
-                  </td>
-                </tr>
-                <!-- </button> -->
-              </ng-container>
-            </tbody>
-          </table>
-        </ng-container>
-      </div>
-    </ng-container>
+          <tbody>
+            <ng-container *ngFor="let data of localStorageArray; let i = index">
+              <!-- <button> -->
+              <tr (click)="rowClickHandler(data)" draggable="true" (dragover)="allowDrop($event)"
+                (drop)="drop($event, i)">
+                <td>
+                  #{{i+1}}
+                </td>
+                <td class="hide-row">
+                  {{data.maskedEmail}}
+                </td>
+                <td>
+                  {{data.name}}
+                </td>
+                <td>
+                  {{data.hexCode}}
+                </td>
+              </tr>
+              <!-- </button> -->
+            </ng-container>
+          </tbody>
+        </table>
+      </ng-container>
+    </div>
     <ng-container *ngIf="localStorageArray.length>0">
       <div class="export-csv-button-container">
         <button type="button" (click)="exportCSV()">Export CSV</button>
@@ -89,9 +87,3 @@
   </div>
 
 </div>
-<ng-template #noJoineesTemplate>
-  <div class=" nothing-class">
-    nothing
-  </div>
-  <!-- <h4>{{noJoineesText}}</h4> -->
-</ng-template>
